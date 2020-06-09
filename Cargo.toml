@@ -1,0 +1,7 @@
+[workspace]
+members = [
+    "median-of-two-sorted-arrays",
+    "zigzag-conversion",
+    "merge-k-sorted-linked-lists",
+    "substring-with-concatenation-of-all-words",
+]

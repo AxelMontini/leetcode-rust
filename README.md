@@ -2,4 +2,4 @@
 
 Various leetcode challenges solved in Rust.
 
-They don't seek the best performance.
+Not all of them seek the best performance possible, but some do.

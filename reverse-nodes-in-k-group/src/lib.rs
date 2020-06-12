@@ -25,24 +25,23 @@ pub fn reverse_k_group(mut head: Option<Box<ListNode>>, k: usize) -> Option<Box<
             (Some(reversed), leftover) => {
                 head = leftover;
                 *last = Some(reversed);
-        
+
                 println!("LOO");
-        
+
                 for _ in 0..k {
                     match last.as_mut() {
                         Some(last_ref) => last = &mut last_ref.next,
                         None => unreachable!(),
                     }
                 }
-            },
+            }
             // Nothing more has been reversed; we might have a leftover and the job is done
             (None, leftover) => {
                 *last = leftover;
-                break
-            },
+                break;
+            }
         }
     }
-        
 
     rev_head.next
 }
@@ -51,7 +50,10 @@ pub fn reverse_k_group(mut head: Option<Box<ListNode>>, k: usize) -> Option<Box<
 /// `(reversed, leftover)`
 /// If there were more than `count` nodes, reversed contains the reversed nodes. Else, it's None.
 /// Leftover contains the nodes that weren't reversed (if any).
-fn reverse(mut head: Option<Box<ListNode>>, count: usize) -> (Option<Box<ListNode>>, Option<Box<ListNode>>) {
+fn reverse(
+    mut head: Option<Box<ListNode>>,
+    count: usize,
+) -> (Option<Box<ListNode>>, Option<Box<ListNode>>) {
     let mut rev_head = ListNode::new(0);
 
     // put the elements from head into target, in reversed order.
@@ -64,9 +66,9 @@ fn reverse(mut head: Option<Box<ListNode>>, count: usize) -> (Option<Box<ListNod
             node.next = back;
             target.next = head.take();
             *head = new_node;
-    
+
             i += 1;
-    
+
             if i == count {
                 break;
             }
@@ -80,7 +82,7 @@ fn reverse(mut head: Option<Box<ListNode>>, count: usize) -> (Option<Box<ListNod
     let mut reversed = rev_head.next;
 
     // We haven't reversed enough nodes, thus we need to put them back into the original order
-	// And return them as leftover
+    // And return them as leftover
     if r < count {
         let mut undo_head = ListNode::new(0);
 
@@ -101,14 +103,12 @@ mod tests {
     fn slice_to_node(slice: &[i32]) -> Option<Box<ListNode>> {
         let mut acc = ListNode::new(0);
 
-        slice
-            .into_iter()
-            .fold(&mut acc, |mut cursor, &val| {
-                cursor.next = Some(Box::new(ListNode::new(val)));
-                cursor = cursor.next.as_mut().map(|next| next.as_mut()).unwrap();
-                cursor
-            });
-            acc.next
+        slice.into_iter().fold(&mut acc, |mut cursor, &val| {
+            cursor.next = Some(Box::new(ListNode::new(val)));
+            cursor = cursor.next.as_mut().map(|next| next.as_mut()).unwrap();
+            cursor
+        });
+        acc.next
     }
 
     fn node_to_vec(node: Option<Box<ListNode>>) -> Vec<i32> {
@@ -128,8 +128,8 @@ mod tests {
     #[test]
     fn reverse() {
         let dataset: &[(&[i32], usize, &[i32], &[i32])] = &[
-            (&[1,2,3,4,5,6], 3, &[3,2,1], &[4,5,6]),
-            (&[1,2], 3, &[], &[1,2]),
+            (&[1, 2, 3, 4, 5, 6], 3, &[3, 2, 1], &[4, 5, 6]),
+            (&[1, 2], 3, &[], &[1, 2]),
             (&[], 3, &[], &[]),
         ];
 
@@ -138,7 +138,13 @@ mod tests {
             let out_rev = &node_to_vec(output.0)[..];
             let out_left = &node_to_vec(output.1)[..];
 
-            assert_eq!((*expected, *leftover), (out_rev, out_left), "Expected {:?}, found {:?}", (*expected, *leftover), (out_rev, out_left));
+            assert_eq!(
+                (*expected, *leftover),
+                (out_rev, out_left),
+                "Expected {:?}, found {:?}",
+                (*expected, *leftover),
+                (out_rev, out_left)
+            );
         }
     }
 
@@ -146,7 +152,7 @@ mod tests {
         (&[1, 2], 2, &[2, 1]),
         (&[1, 2, 3], 3, &[3, 2, 1]),
         (&[1, 2, 3], 2, &[2, 1, 3]),
-        ];
+    ];
 
     #[test]
     fn reverse_k_groups() {

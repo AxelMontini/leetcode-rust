@@ -83,7 +83,11 @@ mod tests {
             &["bar", "foo", "the"],
             &[6, 9, 12],
         ),
-        ("lingmindraboofooowingdingbarrwingmonkeypoundcake", &["fooo","barr","wing","ding","wing"], &[13]),
+        (
+            "lingmindraboofooowingdingbarrwingmonkeypoundcake",
+            &["fooo", "barr", "wing", "ding", "wing"],
+            &[13],
+        ),
     ];
 
     #[test]

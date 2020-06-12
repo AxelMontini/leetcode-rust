@@ -4,4 +4,5 @@ members = [
     "zigzag-conversion",
     "merge-k-sorted-linked-lists",
     "substring-with-concatenation-of-all-words",
+    "reverse-nodes-in-k-group",
 ]

@@ -5,4 +5,5 @@ members = [
     "merge-k-sorted-linked-lists",
     "substring-with-concatenation-of-all-words",
     "reverse-nodes-in-k-group",
+    "combination-sum-3",
 ]
